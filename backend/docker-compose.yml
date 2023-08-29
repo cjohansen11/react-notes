@@ -1,0 +1,42 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: notes
+
+  prisma-studio:
+    container_name: prisma-studio
+    build:
+      context: ./prisma
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/notes?schema=public
+    links:
+      - postgres
+    volumes:
+      - ./prisma:/prisma
+    working_dir: /prisma
+    ports:
+      - 5555:5555
+
+  server:
+    build: .
+    ports:
+      - 3001:3001
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/notes?schema=public
+    links:
+      - postgres
+    volumes:
+      - .:/app/
+      - /app/backend/node_modules/
+      - /backend/node_modules/
+    entrypoint: sh -c "yarn prisma migrate deploy && yarn dev"

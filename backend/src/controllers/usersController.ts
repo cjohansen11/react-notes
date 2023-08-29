@@ -11,3 +11,12 @@ export const createUser = async ({
 
   return user;
 };
+
+export const readUser = async ({ userId }: { userId: string }) => {
+  const user = await prisma.user.findUniqueOrThrow({
+    where: { id: userId },
+    include: { notes: true },
+  });
+
+  return user;
+};

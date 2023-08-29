@@ -23,13 +23,31 @@ const createUser = async (
       data: user,
     });
   } catch (error) {
-    res.status(400).send({
+    res.status(500).send({
       status: "error",
       message: `Failed to create user. Error: ${getErrorMessage(error)}`,
     });
   }
 };
 
+const readUser = async (req: Request<{ userId: string }>, res: Response) => {
+  const { userId } = req.params;
+  try {
+    const user = await usersController.readUser({ userId });
+
+    res.status(200).send({
+      status: "success",
+      message: "Successfully fetched user data",
+      data: user,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "error", message: `Unable to fetch user ${userId}` });
+  }
+};
+
 usersRouter.post("/user", createUser);
+usersRouter.get("/user/:userId", readUser);
 
 export default usersRouter;

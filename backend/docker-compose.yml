@@ -38,5 +38,4 @@ services:
     volumes:
       - .:/app/
       - /app/backend/node_modules/
-      - /backend/node_modules/
     entrypoint: sh -c "yarn prisma migrate deploy && yarn dev"

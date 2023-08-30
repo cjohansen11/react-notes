@@ -109,7 +109,7 @@ describe(`API testing`, () => {
       supertest(API_ROOT).put(`/note/${noteId}`).send(updatedNote).expect(204);
       supertest(API_ROOT)
         .get(`/note/${noteId}`)
-        .expect(200)
+        .expect(204)
         .end((err, res) => {
           if (err) throw err;
           expect(res.body.data).to.deep.equal({

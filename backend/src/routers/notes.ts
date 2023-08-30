@@ -7,14 +7,14 @@ const createNote = async (
   req: Request<
     Record<string, unknown>,
     Record<string, unknown>,
-    { note: { note: string; title?: string }; userId: string }
+    { note: { note: string; title?: string }; email: string }
   >,
   res: Response
 ) => {
   try {
-    const { note, userId } = req.body;
+    const { note, email } = req.body;
 
-    const newNote = await notesController.createNote({ note, userId });
+    const newNote = await notesController.createNote({ note, email });
 
     res.status(201).send({
       status: "success",

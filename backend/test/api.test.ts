@@ -52,11 +52,11 @@ describe(`API testing`, () => {
 
   describe("Note routes", () => {
     const note = { note: "Testing note creation", title: "Hello world" };
+    const user = { email: "note_test@test.com" };
     let userId = "";
     let noteId = "";
 
     before((done) => {
-      const user = { email: "note_test@test.com" };
       supertest(API_ROOT)
         .post("/user")
         .send(user)
@@ -73,7 +73,7 @@ describe(`API testing`, () => {
         .post("/note")
         .send({
           note,
-          userId,
+          email: user.email,
         })
         .expect(201)
         .end((err, res) => {
@@ -139,11 +139,17 @@ describe(`API testing`, () => {
     it("GET /note/:userId", async () => {
       await supertest(API_ROOT)
         .post(`/note`)
-        .send({ note: { title: "Note 1", note: "This is the first" }, userId })
+        .send({
+          note: { title: "Note 1", note: "This is the first" },
+          email: user.email,
+        })
         .expect(201);
       await supertest(API_ROOT)
         .post(`/note`)
-        .send({ note: { title: "Note 2", note: "This is the second" }, userId })
+        .send({
+          note: { title: "Note 2", note: "This is the second" },
+          email: user.email,
+        })
         .expect(201);
 
       const getRes = await supertest(API_ROOT)

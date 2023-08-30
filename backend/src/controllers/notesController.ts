@@ -2,12 +2,14 @@ import { prisma } from "../utils";
 
 export const createNote = async ({
   note: { note, title },
-  userId,
+  email,
 }: {
   note: { note: string; title?: string };
-  userId: string;
+  email: string;
 }) => {
-  const newNote = await prisma.note.create({ data: { userId, title, note } });
+  const newNote = await prisma.note.create({
+    data: { User: { connect: { email } }, title, note },
+  });
 
   return newNote;
 };

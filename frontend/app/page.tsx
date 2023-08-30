@@ -26,17 +26,19 @@ export default function Home() {
       enabled: !!userEmail,
       staleTime: Infinity,
       refetchOnWindowFocus: false,
+      retry: false,
       onSuccess(data) {
         window.localStorage.setItem("existingUser", data.email);
         setIsVerified(true);
       },
+      async onError() {
+        await createUser({ email: userEmail });
+      },
     },
   });
 
-  const handleLoginSubmit = async (email: string) => {
+  const handleLoginSubmit = async ({ email }: { email: string }) => {
     setUserEmail(email);
-
-    if (!user) await createUser({ email });
   };
 
   useEffect(() => {

@@ -1,17 +1,32 @@
 import { useState } from "react";
 import { Button } from "..";
+import { useForm, Controller } from "react-hook-form";
+import { LoginFormSchemaType, LoginFormSchema } from "@/types/Forms";
+import { zodResolver } from "@hookform/resolvers/zod";
 
-export type LoginProps = { onSubmit: (email: string) => void };
+export type LoginProps = { onSubmit: ({ email }: { email: string }) => void };
 
 export default function Login({ onSubmit }: LoginProps) {
-  const [email, setEmail] = useState("");
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormSchemaType>({ resolver: zodResolver(LoginFormSchema) });
 
   return (
     <div>
-      <input onChange={(e) => setEmail(e.target.value)}></input>
-      <Button isDisabled={!email} onClick={() => onSubmit(email)}>
-        Submit
-      </Button>
+      <Controller
+        control={control}
+        name="email"
+        render={({ field }) => (
+          <input
+            onChange={field.onChange}
+            onBlur={field.onBlur}
+            value={field.value}
+          />
+        )}
+      />
+      <Button onClick={handleSubmit(onSubmit)}>Submit</Button>
     </div>
   );
 }

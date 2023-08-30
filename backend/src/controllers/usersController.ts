@@ -9,7 +9,6 @@ export const createUser = async ({ email }: { email: string }) => {
 export const readUser = async ({ userId }: { userId: string }) => {
   const user = await prisma.user.findUniqueOrThrow({
     where: { id: userId },
-    include: { notes: true },
   });
 
   return user;

@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Button } from "..";
+import styles from "./login.module.css";
+import { Button, Input } from "..";
 import { useForm, Controller } from "react-hook-form";
 import { LoginFormSchemaType, LoginFormSchema } from "@/types/Forms";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,15 +14,18 @@ export default function Login({ onSubmit }: LoginProps) {
   } = useForm<LoginFormSchemaType>({ resolver: zodResolver(LoginFormSchema) });
 
   return (
-    <div>
+    <div className={styles.container}>
+      <p>Enter your email:</p>
       <Controller
         control={control}
         name="email"
         render={({ field }) => (
-          <input
+          <Input
             onChange={field.onChange}
             onBlur={field.onBlur}
             value={field.value}
+            helperText={errors.email?.message}
+            isError={!!errors.email}
           />
         )}
       />

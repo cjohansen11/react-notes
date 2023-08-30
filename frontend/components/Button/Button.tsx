@@ -12,7 +12,7 @@ export default function Button({ children }: ButtonProps) {
       },
       onSuccess(data, variables, context) {
         console.log({ data });
-        window.localStorage.setItem("userId", data.id);
+        window.localStorage.setItem("existingUser", data.email);
       },
     },
   });

@@ -1,28 +1,22 @@
 import { PropsWithChildren } from "react";
 import styles from "./button.module.css";
-import useCreateUser from "@/hooks/useCreateUser";
 
-export type ButtonProps = PropsWithChildren;
+export type ButtonProps = {
+  onClick?: () => void;
+  isDisabled?: boolean;
+} & PropsWithChildren;
 
-export default function Button({ children }: ButtonProps) {
-  const { mutate } = useCreateUser({
-    options: {
-      onError(error, variables, context) {
-        console.log({ error });
-      },
-      onSuccess(data, variables, context) {
-        console.log({ data });
-        window.localStorage.setItem("existingUser", data.email);
-      },
-    },
-  });
-
-  const onClick = async () => {
-    await mutate({ email: "christian@gmail.com" });
+export default function Button({ children, onClick, isDisabled }: ButtonProps) {
+  const handleClick = () => {
+    onClick ? onClick() : null;
   };
 
   return (
-    <button className={styles.button} onClick={onClick}>
+    <button
+      disabled={isDisabled}
+      className={styles.button}
+      onClick={handleClick}
+    >
       {children}
     </button>
   );

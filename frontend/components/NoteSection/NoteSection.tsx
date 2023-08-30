@@ -6,14 +6,28 @@ import { NoteFormSchema, NoteFormType } from "@/types/Forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateNote from "@/hooks/useCreateNote";
 import { Note } from "@/types/Notes";
+import { User } from "@/types/Users";
+import useListNotes from "@/hooks/useListNotes";
 
 export type NoteSectionProps = {
-  email: string;
+  user: User;
 };
 
-export default function NoteSection({ email }: NoteSectionProps) {
+export default function NoteSection({
+  user: { email, id: userId },
+}: NoteSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<Note[]>([]);
+
+  const { isLoading: isLoadingNotes } = useListNotes({
+    userId,
+    options: {
+      enabled: !!userId,
+      onSuccess(data) {
+        setNotes(data);
+      },
+    },
+  });
 
   const { mutate: createNote } = useCreateNote({
     options: {

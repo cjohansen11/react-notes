@@ -20,7 +20,7 @@ export default function Home() {
   const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { isLoading: isFetchingUser } = useReadUser({
+  const { data: user, isLoading: isFetchingUser } = useReadUser({
     email: userEmail,
     options: {
       enabled: !!userEmail,
@@ -57,8 +57,8 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      {isVerified ? (
-        <NoteSection email={userEmail} />
+      {isVerified && user ? (
+        <NoteSection user={user} />
       ) : (
         <Login onSubmit={handleLoginSubmit} />
       )}

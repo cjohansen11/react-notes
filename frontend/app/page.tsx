@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { Button, Login, SearchBar } from "@/components";
+import { ActivityIndicator, Login, SearchBar } from "@/components";
 import useCreateUser from "@/hooks/useCreateUser";
 import useReadUser from "@/hooks/useReadUser";
 import { useEffect, useState } from "react";
@@ -18,6 +18,7 @@ export default function Home() {
 
   const [userEmail, setUserEmail] = useState("");
   const [isVerified, setIsVerified] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const { data: user, isLoading: isFetchingUser } = useReadUser({
     email: userEmail,
@@ -42,7 +43,15 @@ export default function Home() {
     const userEmail = window.localStorage.getItem("existingUser");
 
     if (userEmail) setUserEmail(userEmail);
+    setIsLoading(false);
   }, []);
+
+  if (isLoading || isFetchingUser)
+    return (
+      <main className={styles.main}>
+        <ActivityIndicator />
+      </main>
+    );
 
   return (
     <main className={styles.main}>

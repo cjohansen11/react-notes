@@ -57,7 +57,7 @@ describe(`API testing`, () => {
     const noteIds: string[] = [];
 
     before((done) => {
-      const user = { email: "tesdddt@test.com" };
+      const user = { email: "note_test@test.com" };
       supertest(API_ROOT)
         .post("/user")
         .send(user)
@@ -67,15 +67,6 @@ describe(`API testing`, () => {
           userId = res.body.data.id;
           done();
         });
-    });
-
-    after((done) => {
-      supertest(API_ROOT).delete(`/user/${userId}`).expect(204);
-
-      for (const id of noteIds) {
-        supertest(API_ROOT).delete(`/note/${id}`).expect(204);
-      }
-      done();
     });
 
     it("POST /note", (done) => {
@@ -99,25 +90,46 @@ describe(`API testing`, () => {
         .expect(200)
         .end((err, res) => {
           if (err) throw err;
-          expect(res.body.data).to.deep.equal({ ...note, userId, id: noteId });
+
+          const responseNote = {
+            note: res.body.data.note,
+            title: res.body.data.title,
+            id: res.body.data.id,
+            userId: res.body.data.userId,
+          };
+
+          expect(responseNote).to.deep.equal({ ...note, userId, id: noteId });
           done();
         });
     });
 
     it("PUT /note/:noteId", (done) => {
       const updatedNote = { title: "World Hello", note: "Testing PUT /note" };
-      supertest(API_ROOT).put(`/note/${noteId}`).send(updatedNote).expect(204);
       supertest(API_ROOT)
-        .get(`/note/${noteId}`)
+        .put(`/note/${noteId}`)
+        .send(updatedNote)
         .expect(204)
-        .end((err, res) => {
-          if (err) throw err;
-          expect(res.body.data).to.deep.equal({
-            ...updatedNote,
-            userId,
-            id: noteId,
-          });
-          done();
+        .then(() => {
+          supertest(API_ROOT)
+            .get(`/note/${noteId}`)
+            .expect(200)
+            .end((err, res) => {
+              if (err) throw err;
+
+              const responseNote = {
+                note: res.body.data.note,
+                title: res.body.data.title,
+                id: res.body.data.id,
+                userId: res.body.data.userId,
+              };
+
+              expect(responseNote).to.deep.equal({
+                ...updatedNote,
+                userId,
+                id: noteId,
+              });
+              done();
+            });
         });
     });
 
@@ -125,31 +137,32 @@ describe(`API testing`, () => {
       supertest(API_ROOT).delete(`/note/${noteId}`).expect(204, done);
     });
 
-    it("GET /note/:userId", (done) => {
-      supertest(API_ROOT)
+    it("GET /note/:userId", async () => {
+      const firstNoteRes = await supertest(API_ROOT)
         .post(`/note`)
         .send({ note: { title: "Note 1", note: "This is the first" }, userId })
-        .expect(201)
-        .end((err, res) => {
-          if (err) throw err;
-          noteIds.push(res.body.data.id);
-        });
-      supertest(API_ROOT)
+        .expect(201);
+      noteIds.push(firstNoteRes.body.data.id);
+
+      const secondNoteRes = await supertest(API_ROOT)
         .post(`/note`)
         .send({ note: { title: "Note 2", note: "This is the second" }, userId })
-        .expect(201)
-        .end((err, res) => {
-          if (err) throw err;
-          noteIds.push(res.body.data.id);
-        });
-      supertest(API_ROOT)
-        .get(`/note/${userId}`)
-        .expect(200)
-        .end((err, res) => {
-          if (err) throw err;
-          expect(res.body.data.length).to.equal(2);
-          done();
-        });
+        .expect(201);
+      noteIds.push(secondNoteRes.body.data.id);
+
+      const getRes = await supertest(API_ROOT)
+        .get(`/note/list/${userId}`)
+        .expect(200);
+
+      expect(getRes.body.data.length).to.equal(2);
+    });
+
+    after(async () => {
+      for (const id of noteIds) {
+        await supertest(API_ROOT).delete(`/note/${id}`).expect(204);
+      }
+
+      await supertest(API_ROOT).delete(`/user/${userId}`).expect(204);
     });
   });
 });

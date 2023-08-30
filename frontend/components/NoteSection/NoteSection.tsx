@@ -1,4 +1,4 @@
-import { SearchBar } from "..";
+import { Search } from "..";
 import styles from "./noteSection.module.css";
 
 export type NoteSectionProps = {
@@ -9,7 +9,7 @@ export default function NoteSection({ email }: NoteSectionProps) {
   return (
     <>
       <h1 className={styles.title}>{`${email.split("@")[0]}'s Notes`}</h1>
-      <SearchBar></SearchBar>
+      <Search />
     </>
   );
 }

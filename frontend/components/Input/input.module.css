@@ -26,6 +26,11 @@
   font-size: 18px;
 }
 
+.input::placeholder {
+  color: var(--main-text-hex);
+  opacity: 65%;
+}
+
 .inputError {
   min-height: 36px;
   min-width: 260px;

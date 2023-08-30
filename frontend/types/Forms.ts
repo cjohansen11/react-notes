@@ -7,3 +7,16 @@ export const LoginFormSchema = z.object({
 });
 
 export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
+
+const SearchFormSchema = z.object({
+  query: z.string().optional(),
+  sort: z
+    .nativeEnum({
+      newest: "Newest",
+      oldest: "Oldest",
+      updated: "Recently Updated",
+    })
+    .optional(),
+});
+
+export type SearchFormType = z.infer<typeof SearchFormSchema>;

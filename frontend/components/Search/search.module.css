@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  gap: 12px;
+}
+
+.select {
+  background-color: var(--alt-background-hex);
+  color: var(--main-text-hex);
+  min-height: 42px;
+  border-radius: 4px;
+  font-size: 18px;
+}
+
+.selectContainer {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}

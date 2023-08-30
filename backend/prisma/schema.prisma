@@ -21,7 +21,7 @@ model Note {
   id         String   @id @default(uuid())
   title      String?  @db.VarChar(50)
   note       String   @db.VarChar(300)
-  User       User     @relation(fields: [userId], references: [id])
+  User       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String
   createDate DateTime @default(now())
   updateDate DateTime @updatedAt

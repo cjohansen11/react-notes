@@ -54,7 +54,6 @@ describe(`API testing`, () => {
     const note = { note: "Testing note creation", title: "Hello world" };
     let userId = "";
     let noteId = "";
-    const noteIds: string[] = [];
 
     before((done) => {
       const user = { email: "note_test@test.com" };
@@ -138,17 +137,14 @@ describe(`API testing`, () => {
     });
 
     it("GET /note/:userId", async () => {
-      const firstNoteRes = await supertest(API_ROOT)
+      await supertest(API_ROOT)
         .post(`/note`)
         .send({ note: { title: "Note 1", note: "This is the first" }, userId })
         .expect(201);
-      noteIds.push(firstNoteRes.body.data.id);
-
-      const secondNoteRes = await supertest(API_ROOT)
+      await supertest(API_ROOT)
         .post(`/note`)
         .send({ note: { title: "Note 2", note: "This is the second" }, userId })
         .expect(201);
-      noteIds.push(secondNoteRes.body.data.id);
 
       const getRes = await supertest(API_ROOT)
         .get(`/note/list/${userId}`)
@@ -158,10 +154,6 @@ describe(`API testing`, () => {
     });
 
     after(async () => {
-      for (const id of noteIds) {
-        await supertest(API_ROOT).delete(`/note/${id}`).expect(204);
-      }
-
       await supertest(API_ROOT).delete(`/user/${userId}`).expect(204);
     });
   });

@@ -16,13 +16,14 @@
 }
 
 .input {
-  min-height: 36px;
+  min-height: 42px;
   min-width: 260px;
   padding-left: 4px;
   color: var(--main-text-hex);
   background-color: var(--alt-background-hex);
   border-style: none;
   border-radius: 4px;
+  font-size: 18px;
 }
 
 .inputError {

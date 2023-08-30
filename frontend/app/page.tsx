@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { ActivityIndicator, Login, SearchBar } from "@/components";
+import { ActivityIndicator, Login, NoteSection, SearchBar } from "@/components";
 import useCreateUser from "@/hooks/useCreateUser";
 import useReadUser from "@/hooks/useReadUser";
 import { useEffect, useState } from "react";
@@ -58,12 +58,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       {isVerified ? (
-        <>
-          <h1 className={styles.title}>{`${
-            userEmail.split("@")[0]
-          }'s Notes`}</h1>
-          <SearchBar></SearchBar>
-        </>
+        <NoteSection email={userEmail} />
       ) : (
         <Login onSubmit={handleLoginSubmit} />
       )}

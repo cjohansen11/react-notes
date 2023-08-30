@@ -15,7 +15,6 @@ export default function Login({ onSubmit }: LoginProps) {
 
   return (
     <div className={styles.container}>
-      <p>Enter your email:</p>
       <Controller
         control={control}
         name="email"
@@ -26,6 +25,10 @@ export default function Login({ onSubmit }: LoginProps) {
             value={field.value}
             helperText={errors.email?.message}
             isError={!!errors.email}
+            title="Enter your email:"
+            onKeyUp={(e) => {
+              if (e.code.includes("Enter")) handleSubmit(onSubmit)();
+            }}
           />
         )}
       />

@@ -4,15 +4,19 @@ import { DetailedHTMLProps, InputHTMLAttributes } from "react";
 export type InputProps = {
   isError?: boolean;
   helperText?: string;
+  title?: string;
 } & DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-export default function Input({ isError, helperText, ...rest }: InputProps) {
+export default function Input({
+  isError,
+  helperText,
+  title,
+  ...rest
+}: InputProps) {
   return (
     <div className={styles.container}>
-      <input
-        {...rest}
-        className={isError ? styles.inputError : styles.input}
-      ></input>
+      {title && <p className={styles.title}>{title}</p>}
+      <input {...rest} className={isError ? styles.inputError : styles.input} />
       {helperText && (
         <p className={isError ? styles.error : styles.helperText}>
           {helperText}

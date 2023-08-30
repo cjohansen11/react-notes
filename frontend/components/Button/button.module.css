@@ -1,0 +1,12 @@
+.button {
+  display: flex;
+  background-color: var(--main-text-hex);
+  border-color: var(--alt-text-dark-hex);
+  color: var(--main-background-hex);
+  font-weight: bold;
+  padding-left: 14px;
+  padding-right: 14px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-radius: 4px;
+}

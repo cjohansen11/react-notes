@@ -8,14 +8,14 @@ const createUser = async (
   req: Request<
     Record<string, unknown>,
     Record<string, unknown>,
-    { name: string; email: string }
+    { email: string }
   >,
   res: Response
 ) => {
   try {
-    const { name, email } = req.body;
+    const { email } = req.body;
 
-    const user = await usersController.createUser({ name, email });
+    const user = await usersController.createUser({ email });
 
     res.status(201).send({
       status: "success",

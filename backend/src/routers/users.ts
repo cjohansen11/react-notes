@@ -47,7 +47,27 @@ const readUser = async (req: Request<{ userId: string }>, res: Response) => {
   }
 };
 
+const deleteUser = async (req: Request<{ userId: string }>, res: Response) => {
+  const { userId } = req.params;
+
+  try {
+    await usersController.deleteUser({ userId });
+
+    res
+      .status(204)
+      .send({
+        status: "success",
+        message: `Successfully deleted user ${userId}`,
+      });
+  } catch (error) {
+    res
+      .status(500)
+      .send({ status: "error", message: `Failed to delete user ${userId}` });
+  }
+};
+
 usersRouter.post("/user", createUser);
 usersRouter.get("/user/:userId", readUser);
+usersRouter.delete("/user/:userId", deleteUser);
 
 export default usersRouter;

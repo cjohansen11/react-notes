@@ -17,3 +17,20 @@
   color: var(--main-text-hex);
   opacity: 65%;
 }
+
+.error {
+  border-style: solid;
+  border-width: 2px;
+  border-color: red;
+  border-radius: 4px;
+}
+
+.helperText {
+  color: var(--main-background-hex);
+  font-size: small;
+  padding-top: 4px;
+}
+
+.helperTextError {
+  color: red;
+}

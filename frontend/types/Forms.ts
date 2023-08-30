@@ -20,3 +20,13 @@ const SearchFormSchema = z.object({
 });
 
 export type SearchFormType = z.infer<typeof SearchFormSchema>;
+
+export const NoteFormSchema = z.object({
+  title: z.string().max(50, { message: "Title exceeds 50 character limit" }),
+  note: z
+    .string()
+    .min(20, { message: "Must be atleast 20 characters" })
+    .max(300, { message: "Note exceeds 300 character limit" }),
+});
+
+export type NoteFormType = z.infer<typeof NoteFormSchema>;

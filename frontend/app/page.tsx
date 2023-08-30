@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./page.module.css";
-import { ActivityIndicator, Login, NoteSection, SearchBar } from "@/components";
+import { ActivityIndicator, Login, NoteSection } from "@/components";
 import useCreateUser from "@/hooks/useCreateUser";
 import useReadUser from "@/hooks/useReadUser";
 import { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ export default function Home() {
   const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data: user, isLoading: isFetchingUser } = useReadUser({
+  const { isLoading: isFetchingUser } = useReadUser({
     email: userEmail,
     options: {
       enabled: !!userEmail,

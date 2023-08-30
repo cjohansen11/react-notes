@@ -1,6 +1,9 @@
+import styles from "./noteSection.module.css";
 import { useState } from "react";
 import { Button, NoteModal, Search } from "..";
-import styles from "./noteSection.module.css";
+import { useForm, FormProvider } from "react-hook-form";
+import { NoteFormSchema, NoteFormType } from "@/types/Forms";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export type NoteSectionProps = {
   email: string;
@@ -8,6 +11,11 @@ export type NoteSectionProps = {
 
 export default function NoteSection({ email }: NoteSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const newNoteMethods = useForm<NoteFormType>({
+    resolver: zodResolver(NoteFormSchema),
+  });
+  const { handleSubmit } = newNoteMethods;
 
   const handleNewNote = () => {
     setIsModalOpen(true);
@@ -22,10 +30,12 @@ export default function NoteSection({ email }: NoteSectionProps) {
           <Button onClick={handleNewNote}>Create Note</Button>
         </div>
       </div>
-      <NoteModal
-        isVisible={isModalOpen}
-        handleClose={() => setIsModalOpen(false)}
-      />
+      <FormProvider {...newNoteMethods}>
+        <NoteModal
+          isVisible={isModalOpen}
+          handleClose={() => setIsModalOpen(false)}
+        />
+      </FormProvider>
     </>
   );
 }

@@ -1,10 +1,17 @@
 import styles from "./noteModal.module.css";
 import Modal from "react-modal";
 import { Input, TextArea, Button } from "..";
+import { Controller, useFormContext } from "react-hook-form";
+import { NoteFormType } from "@/types/Forms";
 
 export type NoteModalProps = { isVisible: boolean; handleClose: () => void };
 
 export default function NoteModal({ isVisible, handleClose }: NoteModalProps) {
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext<NoteFormType>();
+
   return (
     <Modal
       isOpen={isVisible}
@@ -27,8 +34,34 @@ export default function NoteModal({ isVisible, handleClose }: NoteModalProps) {
       <div className={styles.container}>
         <p className={styles.title}>Create a new note</p>
         <div>
-          <Input placeholder="Title" />
-          <TextArea placeholder="Note text" />
+          <Controller
+            control={control}
+            name="title"
+            render={({ field }) => (
+              <Input
+                placeholder="Title"
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                value={field.value}
+                isError={!!errors.title}
+                helperText={errors.title?.message}
+              />
+            )}
+          />
+          <Controller
+            control={control}
+            name="note"
+            render={({ field }) => (
+              <TextArea
+                placeholder="Note text"
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                value={field.value}
+                isError={!!errors.note}
+                helperText={errors.note?.message}
+              />
+            )}
+          />
         </div>
         <Button>Save</Button>
       </div>

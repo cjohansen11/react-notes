@@ -27,9 +27,9 @@ describe(`API testing`, () => {
         });
     });
 
-    it("GET /user/:userId should return the correct user", (done) => {
+    it("GET /user/:email should return the correct user", (done) => {
       supertest(API_ROOT)
-        .get(`/user/${userId}`)
+        .get(`/user/${user.email}`)
         .expect(200)
         .end((err, res) => {
           if (err) throw err;

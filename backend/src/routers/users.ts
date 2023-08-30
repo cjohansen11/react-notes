@@ -30,10 +30,13 @@ const createUser = async (
   }
 };
 
-const readUser = async (req: Request<{ userId: string }>, res: Response) => {
-  const { userId } = req.params;
+const readUserByEmail = async (
+  req: Request<{ email: string }>,
+  res: Response
+) => {
+  const { email } = req.params;
   try {
-    const user = await usersController.readUser({ userId });
+    const user = await usersController.readUserByEmail({ email });
 
     res.status(200).send({
       status: "success",
@@ -43,7 +46,7 @@ const readUser = async (req: Request<{ userId: string }>, res: Response) => {
   } catch (error) {
     res
       .status(500)
-      .send({ status: "error", message: `Unable to fetch user ${userId}` });
+      .send({ status: "error", message: `Unable to fetch user ${email}` });
   }
 };
 
@@ -53,12 +56,10 @@ const deleteUser = async (req: Request<{ userId: string }>, res: Response) => {
   try {
     await usersController.deleteUser({ userId });
 
-    res
-      .status(204)
-      .send({
-        status: "success",
-        message: `Successfully deleted user ${userId}`,
-      });
+    res.status(204).send({
+      status: "success",
+      message: `Successfully deleted user ${userId}`,
+    });
   } catch (error) {
     res
       .status(500)
@@ -67,7 +68,7 @@ const deleteUser = async (req: Request<{ userId: string }>, res: Response) => {
 };
 
 usersRouter.post("/user", createUser);
-usersRouter.get("/user/:userId", readUser);
+usersRouter.get("/user/:email", readUserByEmail);
 usersRouter.delete("/user/:userId", deleteUser);
 
 export default usersRouter;

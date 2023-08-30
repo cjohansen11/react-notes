@@ -13,3 +13,5 @@ export const createUser = async ({ email }: { email: string }) => {
     throw new Error((error as Error).message);
   }
 };
+
+export const readUserByEmail = async ({ email }: { email: string }) => {};

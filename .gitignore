@@ -9,7 +9,7 @@ frontend/.pnp
 /coverage
 
 # next.js
-frontend/.next
+frontend/*.next
 frontend/out/
 
 # production

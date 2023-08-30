@@ -1,0 +1,39 @@
+.modal {
+  background-color: var(--note-hex);
+  display: flex;
+  flex: 1;
+  max-width: 400px;
+  min-height: 400px;
+  align-self: center;
+  justify-self: center;
+  border-radius: 4px;
+  opacity: 1;
+  animation-name: fadeInOpacity;
+  animation-iteration-count: 1;
+  animation-timing-function: ease-in;
+  animation-duration: 500ms;
+}
+
+.title {
+  color: var(--main-background-hex);
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 12px;
+  gap: 8px;
+}
+
+@keyframes fadeInOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -4,9 +4,17 @@ import { Input, TextArea, Button } from "..";
 import { Controller, useFormContext } from "react-hook-form";
 import { NoteFormType } from "@/types/Forms";
 
-export type NoteModalProps = { isVisible: boolean; handleClose: () => void };
+export type NoteModalProps = {
+  isVisible: boolean;
+  handleClose: () => void;
+  handleSubmit: () => void;
+};
 
-export default function NoteModal({ isVisible, handleClose }: NoteModalProps) {
+export default function NoteModal({
+  isVisible,
+  handleClose,
+  handleSubmit,
+}: NoteModalProps) {
   const {
     control,
     formState: { errors },
@@ -63,7 +71,7 @@ export default function NoteModal({ isVisible, handleClose }: NoteModalProps) {
             )}
           />
         </div>
-        <Button>Save</Button>
+        <Button onClick={handleSubmit}>Save</Button>
       </div>
     </Modal>
   );

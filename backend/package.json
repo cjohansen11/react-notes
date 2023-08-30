@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --config nodemon.json src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha \"./test/**/*.test.js\" --exit"
   },
   "dependencies": {
     "@prisma/client": "^5.2.0",
@@ -17,9 +17,11 @@
     "@types/express": "^4.17.17",
     "@types/morgan": "^1.9.5",
     "@types/node": "^20.5.7",
+    "mocha": "^10.2.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
     "prisma": "^5.2.0",
+    "supertest": "^6.3.3",
     "ts-node": "^10.9.1",
     "typescript": "^5.2.2"
   }

@@ -21,7 +21,7 @@ describe(`API testing`, () => {
         done();
       });
   });
-  it("GET user/:userId should return the correct user", (done) => {
+  it("GET /user/:userId should return the correct user", (done) => {
     supertest(API_ROOT)
       .get(`/user/${userId}`)
       .expect(200)
@@ -30,5 +30,11 @@ describe(`API testing`, () => {
         expect(res.body.data).to.deep.equal({ id: userId, email: user.email });
         done();
       });
+  });
+  it("DELETE /user/:userId should delete the user and return a 204 status code", (done) => {
+    supertest(API_ROOT).delete(`/user/${userId}`).expect(204, done);
+  });
+  it("GET /user/:userId should fail to fetch deleted userId", (done) => {
+    supertest(API_ROOT).get(`/user/${userId}`).expect(500, done);
   });
 });

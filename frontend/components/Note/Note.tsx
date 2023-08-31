@@ -65,7 +65,7 @@ export default function Note({
             className={styles.deleteButton}
             onClick={() => handleDelete({ noteId: id })}
           >
-            <img src="/icon_delete.png" />
+            <img src="/icon_delete.png" alt="delete note icon" />
           </button>
         </div>
       </div>

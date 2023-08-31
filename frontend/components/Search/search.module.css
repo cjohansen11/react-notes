@@ -11,14 +11,12 @@
   min-height: 42px;
   border-radius: 4px;
   font-size: 18px;
-  width: 100%;
 }
 
 .selectContainer {
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
-  width: 100%;
 }
 
 @media (max-width: 768px) {
@@ -27,8 +25,12 @@
     align-items: center;
     gap: 0;
   }
+  .select {
+    width: 100%;
+  }
   .selectContainer {
     padding-top: 4px;
     padding-bottom: 4px;
+    width: 100%;
   }
 }

@@ -6,7 +6,7 @@ export default function Search() {
 
   return (
     <div className={styles.container}>
-      <Input placeholder="Search for notes" />
+      <Input placeholder="Search notes" />
       <div className={styles.selectContainer}>
         <select className={styles.select}>
           {selectOptions.map((sortOption) => (

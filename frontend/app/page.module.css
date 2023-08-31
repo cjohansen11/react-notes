@@ -7,3 +7,9 @@
   min-height: 100vh;
   color: var(--main-text-hex);
 }
+
+@media (max-width: 768px) {
+  .main {
+    padding: 24px;
+  }
+}

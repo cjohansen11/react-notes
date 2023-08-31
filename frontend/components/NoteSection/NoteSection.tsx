@@ -1,6 +1,6 @@
 import styles from "./noteSection.module.css";
 import { useState } from "react";
-import { Button, Note, NoteModal, Search } from "..";
+import { ActivityIndicator, Button, Note, NoteModal, Search } from "..";
 import { useForm, FormProvider } from "react-hook-form";
 import { NoteFormSchema, NoteFormType, Note as NoteType, User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -79,9 +79,13 @@ export default function NoteSection({
           <Button onClick={handleNewNote}>Create Note</Button>
         </div>
         <div className={styles.notesContainer}>
-          {notes.map((note) => (
-            <Note {...note} key={note.id} handleDelete={handleDeleteNote} />
-          ))}
+          {isLoadingNotes ? (
+            <ActivityIndicator />
+          ) : (
+            notes.map((note) => (
+              <Note {...note} key={note.id} handleDelete={handleDeleteNote} />
+            ))
+          )}
         </div>
       </div>
       <FormProvider {...newNoteMethods}>

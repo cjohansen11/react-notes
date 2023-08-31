@@ -50,3 +50,10 @@
 .title {
   padding-bottom: 4px;
 }
+
+@media (max-width: 768px) {
+  .container {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}

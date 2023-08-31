@@ -1,11 +1,11 @@
 import styles from "./noteSection.module.css";
 import { useState } from "react";
-import { Button, NoteModal, Search } from "..";
+import { Button, Note, NoteModal, Search } from "..";
 import { useForm, FormProvider } from "react-hook-form";
 import { NoteFormSchema, NoteFormType } from "@/types/Forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import useCreateNote from "@/hooks/useCreateNote";
-import { Note } from "@/types/Notes";
+import { Note as NoteType } from "@/types/Notes";
 import { User } from "@/types/Users";
 import useListNotes from "@/hooks/useListNotes";
 
@@ -17,12 +17,14 @@ export default function NoteSection({
   user: { email, id: userId },
 }: NoteSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<NoteType[]>([]);
 
   const { isLoading: isLoadingNotes } = useListNotes({
     userId,
     options: {
       enabled: !!userId,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity,
       onSuccess(data) {
         setNotes(data);
       },
@@ -65,17 +67,11 @@ export default function NoteSection({
           <Search />
           <Button onClick={handleNewNote}>Create Note</Button>
         </div>
-        {notes.map((note) => (
-          <div key={note.id}>
-            <div>
-              <p>{note.title}</p>
-              <p>{note.note}</p>
-            </div>
-            <div>
-              <p>{new Date(note.createDate).toDateString()}</p>
-            </div>
-          </div>
-        ))}
+        <div className={styles.notesContainer}>
+          {notes.map((note) => (
+            <Note {...note} key={note.id} />
+          ))}
+        </div>
       </div>
       <FormProvider {...newNoteMethods}>
         <NoteModal

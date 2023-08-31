@@ -6,6 +6,7 @@ import Input from "./Input/Input";
 import NoteSection from "./NoteSection/NoteSection";
 import TextArea from "./TextArea/TextArea";
 import NoteModal from "./NoteModal/NoteModal";
+import Note from "./Note/Note";
 
 export {
   ActivityIndicator,
@@ -16,4 +17,5 @@ export {
   NoteSection,
   TextArea,
   NoteModal,
+  Note,
 };

@@ -7,7 +7,7 @@ A simple React notes application. This application provides users the ability to
 - Clone the repo
 
 ```bash
-    git@github.com:cjohansen11/react-notes.git
+    git clone git@github.com:cjohansen11/react-notes.git
 ```
 
 #### Install and Start Backend
@@ -46,11 +46,11 @@ A simple React notes application. This application provides users the ability to
 
 #### Usage
 
-- Once backend and frontend are running navigator to `http://localhost:3000`
+- Once backend and frontend are running, navigate to `http://localhost:3000`
 
 ## Running Tests
 
-To run tests, run the following command
+To run tests:
 
 - Verify Docker container is up and running as outlined in the Installation section
 - `cd` into `/backend` directory

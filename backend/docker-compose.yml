@@ -28,7 +28,9 @@ services:
       - 5555:5555
 
   server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.local
     ports:
       - 3001:3001
     environment:

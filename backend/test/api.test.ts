@@ -136,7 +136,7 @@ describe(`API testing`, () => {
       supertest(API_ROOT).delete(`/note/${noteId}`).expect(204, done);
     });
 
-    it("GET /note/:userId", async () => {
+    it("GET /note/list/:userId", async () => {
       await supertest(API_ROOT)
         .post(`/note`)
         .send({
@@ -157,6 +157,44 @@ describe(`API testing`, () => {
         .expect(200);
 
       expect(getRes.body.data.length).to.equal(2);
+    });
+
+    it("GET /note/list/:userId filter query", async () => {
+      const getRes = await supertest(API_ROOT)
+        .get(`/note/list/${userId}?query=second`)
+        .expect(200);
+
+      expect(getRes.body.data[0].note).to.equal("This is the second");
+    });
+
+    it("GET /note/list/:userId orderBy Oldest", async () => {
+      const getRes = await supertest(API_ROOT)
+        .get(`/note/list/${userId}?orderBy=oldest`)
+        .expect(200);
+
+      expect(new Date(getRes.body.data[0].createDate)).to.be.lessThan(
+        new Date(getRes.body.data[1].createDate)
+      );
+    });
+
+    it("GET /note/list/:userId orderBy Newest", async () => {
+      const getRes = await supertest(API_ROOT)
+        .get(`/note/list/${userId}?orderBy=newest`)
+        .expect(200);
+
+      expect(new Date(getRes.body.data[0].createDate)).to.be.greaterThan(
+        new Date(getRes.body.data[1].createDate)
+      );
+    });
+
+    it("GET /note/list/:userId orderBy recentlyUpdated", async () => {
+      const getRes = await supertest(API_ROOT)
+        .get(`/note/list/${userId}?orderBy=recentlyUpdated`)
+        .expect(200);
+
+      expect(new Date(getRes.body.data[0].updateDate)).to.be.greaterThan(
+        new Date(getRes.body.data[1].updateDate)
+      );
     });
 
     after(async () => {

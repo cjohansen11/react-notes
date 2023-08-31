@@ -5,6 +5,8 @@ import initializeRoutes from "./routers";
 
 const app = express();
 
+const PORT = process.env.PORT;
+
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(
@@ -15,6 +17,6 @@ app.use(
 
 initializeRoutes(app);
 
-app.listen(3001, () => {
+app.listen(PORT || 3001, () => {
   console.log(`listening on port 3001`);
 });

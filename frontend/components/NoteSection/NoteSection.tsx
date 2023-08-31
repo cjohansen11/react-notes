@@ -44,7 +44,6 @@ export default function NoteSection({
   const searchMethods = useForm<SearchFormType>({
     defaultValues: {
       orderBy: "Newest",
-      query: "",
     },
   });
   const { watch } = searchMethods;

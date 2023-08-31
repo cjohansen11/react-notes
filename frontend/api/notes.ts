@@ -1,4 +1,8 @@
-import { APIReponseNoteCreate, APIResponseNoteList } from "@/types/Notes";
+import {
+  APIReponseNoteCreate,
+  APIResponseNoteDelete,
+  APIResponseNoteList,
+} from "@/types/Notes";
 import axios from "axios";
 
 export const createNote = async ({
@@ -26,6 +30,20 @@ export const listNotes = async ({ userId }: { userId: string }) => {
   try {
     const { data } = await axios.get<APIResponseNoteList>(
       `${process.env.NEXT_PUBLIC_API}/note/list/${userId}`
+    );
+
+    if (data.status === "error") throw new Error(data.message);
+
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+};
+
+export const deleteNote = async ({ noteId }: { noteId: string }) => {
+  try {
+    const { data } = await axios.delete<APIResponseNoteDelete>(
+      `${process.env.NEXT_PUBLIC_API}/note/${noteId}`
     );
 
     if (data.status === "error") throw new Error(data.message);

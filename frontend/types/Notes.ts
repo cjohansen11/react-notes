@@ -12,3 +12,5 @@ export type Note = {
 export type APIReponseNoteCreate = APIResponse<Note>;
 
 export type APIResponseNoteList = APIResponse<Note[]>;
+
+export type APIResponseNoteDelete = APIResponse<Record<string, never>>;

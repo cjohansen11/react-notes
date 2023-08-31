@@ -8,6 +8,7 @@ import useCreateNote from "@/hooks/useCreateNote";
 import { Note as NoteType } from "@/types/Notes";
 import { User } from "@/types/Users";
 import useListNotes from "@/hooks/useListNotes";
+import useDeleteNote from "@/hooks/useDeleteNote";
 
 export type NoteSectionProps = {
   user: User;
@@ -40,6 +41,16 @@ export default function NoteSection({
     },
   });
 
+  const { mutate: deleteNote } = useDeleteNote({
+    options: {
+      onSuccess(_data, variables) {
+        setNotes((prev) => [
+          ...prev.filter(({ id }) => id !== variables.noteId),
+        ]);
+      },
+    },
+  });
+
   const newNoteMethods = useForm<NoteFormType>({
     resolver: zodResolver(NoteFormSchema),
   });
@@ -59,6 +70,10 @@ export default function NoteSection({
     setIsModalOpen(true);
   };
 
+  const handleDeleteNote = async ({ noteId }: { noteId: string }) => {
+    await deleteNote({ noteId });
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -69,7 +84,7 @@ export default function NoteSection({
         </div>
         <div className={styles.notesContainer}>
           {notes.map((note) => (
-            <Note {...note} key={note.id} />
+            <Note {...note} key={note.id} handleDelete={handleDeleteNote} />
           ))}
         </div>
       </div>

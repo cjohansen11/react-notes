@@ -1,7 +1,10 @@
 import styles from "./note.module.css";
 import { Note as NoteType } from "@/types/Notes";
 
-export type NoteProps = { sortByUpdated?: boolean } & NoteType;
+export type NoteProps = {
+  handleDelete: ({ noteId }: { noteId: string }) => Promise<void>;
+  sortByUpdated?: boolean;
+} & NoteType;
 
 export default function Note({
   id,
@@ -11,6 +14,7 @@ export default function Note({
   userId,
   title,
   sortByUpdated,
+  handleDelete,
 }: NoteProps) {
   const getDateString = (dateString: string) => {
     const date = new Date(dateString);
@@ -41,18 +45,26 @@ export default function Note({
         <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>
         <p className={styles.noteBody}>{note}</p>
       </div>
-      <div className={styles.dateContainer}>
-        {sortByUpdated ? (
-          <div className={styles.date}>
-            <p className={styles.updateDate}>Updated: </p>
-            <p className={styles.updateDate}>{getDateString(updateDate)}</p>
-          </div>
-        ) : (
-          <div className={styles.date}>
-            <p className={styles.createDate}>Created: </p>
-            <p className={styles.createDate}>{getDateString(createDate)}</p>
-          </div>
-        )}
+      <div className={styles.bottomContainer}>
+        <div className={styles.dateContainer}>
+          {sortByUpdated ? (
+            <div className={styles.date}>
+              <p className={styles.updateDate}>Updated: </p>
+              <p className={styles.updateDate}>{getDateString(updateDate)}</p>
+            </div>
+          ) : (
+            <div className={styles.date}>
+              <p className={styles.createDate}>Created: </p>
+              <p className={styles.createDate}>{getDateString(createDate)}</p>
+            </div>
+          )}
+        </div>
+        <button
+          className={styles.deleteButton}
+          onClick={() => handleDelete({ noteId: id })}
+        >
+          <img src="/icon_delete.png" />
+        </button>
       </div>
     </div>
   );

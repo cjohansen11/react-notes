@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "./note.module.css";
 import { Note as NoteType } from "@/types";
 
@@ -13,14 +12,11 @@ export default function Note({
   note,
   createDate,
   updateDate,
-  userId,
   title,
   sortByUpdated,
   handleDelete,
   toggleModal,
 }: NoteProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const getDateString = (dateString: string) => {
     const date = new Date(dateString);
 

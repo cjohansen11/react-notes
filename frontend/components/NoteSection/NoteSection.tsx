@@ -15,6 +15,7 @@ import {
   useListNotes,
   useDeleteNote,
   useDebouncedValue,
+  useUpdateNote,
 } from "@/hooks";
 import { title } from "process";
 
@@ -28,6 +29,9 @@ export default function NoteSection({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<NoteType[]>([]);
   const [isEditForm, setIsEditForm] = useState(false);
+  const [updateNoteId, setUpdateNoteId] = useState<string | undefined>(
+    undefined
+  );
 
   const newNoteMethods = useForm<NoteFormType>({
     resolver: zodResolver(NoteFormSchema),
@@ -77,9 +81,24 @@ export default function NoteSection({
     options: {
       onSuccess(data) {
         setNotes((prev) => [data, ...prev]);
-        setIsModalOpen(false);
-        setValue("note", "");
-        setValue("title", "");
+        handleFormReset();
+      },
+    },
+  });
+
+  const { mutate: updateNote } = useUpdateNote({
+    options: {
+      onSuccess(data) {
+        setNotes(
+          notes.map((note) => {
+            if (note.id === data.id) {
+              note = data;
+            }
+            return note;
+          })
+        );
+
+        handleFormReset();
       },
     },
   });
@@ -94,6 +113,12 @@ export default function NoteSection({
     },
   });
 
+  const handleNoteSubmit = async () => {
+    isEditForm
+      ? await handleSubmit(handleUpdateNoteSubmit)()
+      : await handleSubmit(handleNewNoteSubmit)();
+  };
+
   const handleNewNoteSubmit = async ({
     title,
     note,
@@ -104,18 +129,31 @@ export default function NoteSection({
     await createNote({ note: { note, title }, email });
   };
 
+  const handleUpdateNoteSubmit = async ({
+    title,
+    note,
+  }: {
+    note?: string;
+    title?: string;
+  }) => {
+    if (updateNoteId) await updateNote({ title, note, noteId: updateNoteId });
+  };
+
   const handleDeleteNote = async ({ noteId }: { noteId: string }) => {
     await deleteNote({ noteId });
   };
 
   const toggleModal = ({
+    noteId,
     note,
     title,
   }: {
+    noteId?: string;
     note?: string;
     title?: string | null;
   }) => {
-    if (title || note) {
+    if (noteId) {
+      setUpdateNoteId(noteId);
       if (note) setValue("note", note);
       if (title) setValue("title", title);
       setIsEditForm(true);
@@ -127,6 +165,7 @@ export default function NoteSection({
   const handleFormReset = () => {
     setIsModalOpen(false);
     setIsEditForm(false);
+    setUpdateNoteId(undefined);
     setValue("note", "");
     setValue("title", "");
   };
@@ -151,7 +190,11 @@ export default function NoteSection({
                 key={note.id}
                 handleDelete={handleDeleteNote}
                 toggleModal={() =>
-                  toggleModal({ note: note.note, title: note.title })
+                  toggleModal({
+                    note: note.note,
+                    title: note.title,
+                    noteId: note.id,
+                  })
                 }
               />
             ))
@@ -162,7 +205,7 @@ export default function NoteSection({
         <NoteModal
           isVisible={isModalOpen}
           handleClose={handleFormReset}
-          handleSubmit={() => handleSubmit(handleNewNoteSubmit)()}
+          handleSubmit={handleNoteSubmit}
           isEditForm={isEditForm}
         />
       </FormProvider>

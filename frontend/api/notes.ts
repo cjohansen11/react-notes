@@ -2,6 +2,7 @@ import {
   APIReponseNoteCreate,
   APIResponseNoteDelete,
   APIResponseNoteList,
+  APIResponseNoteUpdate,
 } from "@/types";
 
 import axios from "axios";
@@ -59,6 +60,32 @@ export const deleteNote = async ({ noteId }: { noteId: string }) => {
   try {
     const { data } = await axios.delete<APIResponseNoteDelete>(
       `${process.env.NEXT_PUBLIC_API}/note/${noteId}`
+    );
+
+    if (data.status === "error") throw new Error(data.message);
+
+    return data.data;
+  } catch (error) {
+    throw new Error((error as Error).message);
+  }
+};
+
+export const updateNote = async ({
+  noteId,
+  note,
+  title,
+}: {
+  noteId: string;
+  title?: string;
+  note?: string;
+}) => {
+  try {
+    const { data } = await axios.put<APIResponseNoteUpdate>(
+      `${process.env.NEXT_PUBLIC_API}/note/${noteId}`,
+      {
+        note,
+        title,
+      }
     );
 
     if (data.status === "error") throw new Error(data.message);

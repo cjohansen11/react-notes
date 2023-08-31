@@ -107,7 +107,7 @@ describe(`API testing`, () => {
       supertest(API_ROOT)
         .put(`/note/${noteId}`)
         .send(updatedNote)
-        .expect(204)
+        .expect(202)
         .then(() => {
           supertest(API_ROOT)
             .get(`/note/${noteId}`)

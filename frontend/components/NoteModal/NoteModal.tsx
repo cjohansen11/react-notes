@@ -29,6 +29,7 @@ export default function NoteModal({
       onRequestClose={handleClose}
       preventScroll={true}
       className={styles.modal}
+      ariaHideApp={false}
       style={{
         overlay: {
           backgroundColor: "rgba(0, 0, 0, 0.5)",

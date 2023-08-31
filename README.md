@@ -44,6 +44,10 @@ A simple React notes application. This application provides users the ability to
     yarn dev
 ```
 
+#### Usage
+
+- Once backend and frontend are running navigator to `http://localhost:3000`
+
 ## Running Tests
 
 To run tests, run the following command

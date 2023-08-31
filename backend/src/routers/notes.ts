@@ -89,10 +89,20 @@ const deleteNote = async (req: Request<{ noteId: string }>, res: Response) => {
   }
 };
 
-const listNotes = async (req: Request<{ userId: string }>, res: Response) => {
+const listNotes = async (
+  req: Request<
+    { userId: string },
+    Record<string, unknown>,
+    Record<string, unknown>,
+    { query?: string; orderBy?: "newest" | "oldest" | "recentlyUpdated" }
+  >,
+  res: Response
+) => {
   const { userId } = req.params;
   try {
-    const notes = await notesController.listNotes({ userId });
+    const { query, orderBy } = req.query;
+
+    const notes = await notesController.listNotes({ userId, query, orderBy });
 
     res.status(200).send({
       status: "success",

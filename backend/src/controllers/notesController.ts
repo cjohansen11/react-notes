@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { prisma } from "../utils";
 
 export const createNote = async ({
@@ -41,8 +42,30 @@ export const deleteNote = async ({ noteId }: { noteId: string }) => {
   await prisma.note.delete({ where: { id: noteId } });
 };
 
-export const listNotes = async ({ userId }: { userId: string }) => {
-  const notes = await prisma.note.findMany({ where: { userId } });
+export const listNotes = async ({
+  userId,
+  orderBy = "newest",
+  query,
+}: {
+  userId: string;
+  query?: string;
+  orderBy?: "newest" | "oldest" | "recentlyUpdated";
+}) => {
+  const getOrderBy = (): Prisma.NoteOrderByWithRelationInput => {
+    switch (orderBy) {
+      case "oldest":
+        return { createDate: "asc" };
+      case "recentlyUpdated":
+        return { updateDate: "desc" };
+      default:
+        return { createDate: "desc" };
+    }
+  };
+
+  const notes = await prisma.note.findMany({
+    where: { userId, note: { contains: query, mode: "insensitive" } },
+    orderBy: getOrderBy(),
+  });
 
   return notes;
 };

@@ -13,6 +13,7 @@ A simple React notes application. This application provides users the ability to
 #### Install and Start Backend
 
 - `cd` into the `/backend` directory
+- Create `.env` file from the `env.example`
 - Install Dependencies:
 
 ```bash
@@ -30,6 +31,7 @@ A simple React notes application. This application provides users the ability to
 
 - Open a new terminal
 - `cd` into `/frontend` directory
+- Create `.env.local` file from the `env.local.example`
 - Install Dependencies:
 
 ```bash

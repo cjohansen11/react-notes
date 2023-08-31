@@ -60,7 +60,7 @@ const updateNote = async (
       note,
       title,
     });
-    console.log({ updatedNote });
+
     res.status(202).send({
       status: "success",
       message: `Successfully updated note ${noteId}`,

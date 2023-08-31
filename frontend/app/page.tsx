@@ -58,7 +58,7 @@ export default function Home() {
         <ActivityIndicator />
       </main>
     );
-  console.log({ isVerified, user });
+
   return (
     <main className={styles.main}>
       {isVerified && user ? (

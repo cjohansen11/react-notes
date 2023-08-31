@@ -1,7 +1,7 @@
 import styles from "./noteSection.module.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ActivityIndicator, Button, Note, NoteModal, Search } from "..";
-import { useForm, FormProvider, Form } from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
 import {
   NoteFormSchema,
   NoteFormType,
@@ -17,7 +17,6 @@ import {
   useDebouncedValue,
   useUpdateNote,
 } from "@/hooks";
-import { title } from "process";
 
 export type NoteSectionProps = {
   user: User;

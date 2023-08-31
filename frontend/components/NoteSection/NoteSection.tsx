@@ -172,7 +172,7 @@ export default function NoteSection({
   return (
     <>
       <div className={styles.container}>
-        <h1 className={styles.title}>{`${email.split("@")[0]}'s Notes`}</h1>
+        <h1 className={styles.title}>{`${email.split("@")[0]} - Notes`}</h1>
         <div className={styles.activityContainer}>
           <FormProvider {...searchMethods}>
             <Search />

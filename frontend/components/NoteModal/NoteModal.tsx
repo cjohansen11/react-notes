@@ -8,12 +8,14 @@ export type NoteModalProps = {
   isVisible: boolean;
   handleClose: () => void;
   handleSubmit: () => void;
+  isEditForm?: boolean;
 };
 
 export default function NoteModal({
   isVisible,
   handleClose,
   handleSubmit,
+  isEditForm,
 }: NoteModalProps) {
   const {
     control,
@@ -71,7 +73,7 @@ export default function NoteModal({
             )}
           />
         </div>
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button onClick={handleSubmit}>{isEditForm ? "Update" : "Save"}</Button>
       </div>
     </Modal>
   );

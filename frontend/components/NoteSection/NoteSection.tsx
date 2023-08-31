@@ -27,6 +27,7 @@ export default function NoteSection({
 }: NoteSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<NoteType[]>([]);
+  const [isEditForm, setIsEditForm] = useState(false);
 
   const newNoteMethods = useForm<NoteFormType>({
     resolver: zodResolver(NoteFormSchema),
@@ -103,12 +104,31 @@ export default function NoteSection({
     await createNote({ note: { note, title }, email });
   };
 
-  const handleNewNote = () => {
-    setIsModalOpen(true);
-  };
-
   const handleDeleteNote = async ({ noteId }: { noteId: string }) => {
     await deleteNote({ noteId });
+  };
+
+  const toggleModal = ({
+    note,
+    title,
+  }: {
+    note?: string;
+    title?: string | null;
+  }) => {
+    if (title || note) {
+      if (note) setValue("note", note);
+      if (title) setValue("title", title);
+      setIsEditForm(true);
+    }
+
+    setIsModalOpen(!isModalOpen);
+  };
+
+  const handleFormReset = () => {
+    setIsModalOpen(false);
+    setIsEditForm(false);
+    setValue("note", "");
+    setValue("title", "");
   };
 
   return (
@@ -119,14 +139,21 @@ export default function NoteSection({
           <FormProvider {...searchMethods}>
             <Search />
           </FormProvider>
-          <Button onClick={handleNewNote}>Create Note</Button>
+          <Button onClick={() => toggleModal({})}>Create Note</Button>
         </div>
         <div className={styles.notesContainer}>
           {isLoadingNotes ? (
             <ActivityIndicator />
           ) : (
             notes.map((note) => (
-              <Note {...note} key={note.id} handleDelete={handleDeleteNote} />
+              <Note
+                {...note}
+                key={note.id}
+                handleDelete={handleDeleteNote}
+                toggleModal={() =>
+                  toggleModal({ note: note.note, title: note.title })
+                }
+              />
             ))
           )}
         </div>
@@ -134,8 +161,9 @@ export default function NoteSection({
       <FormProvider {...newNoteMethods}>
         <NoteModal
           isVisible={isModalOpen}
-          handleClose={() => setIsModalOpen(false)}
+          handleClose={handleFormReset}
           handleSubmit={() => handleSubmit(handleNewNoteSubmit)()}
+          isEditForm={isEditForm}
         />
       </FormProvider>
     </>

@@ -1,8 +1,10 @@
+import { useState } from "react";
 import styles from "./note.module.css";
 import { Note as NoteType } from "@/types";
 
 export type NoteProps = {
   handleDelete: ({ noteId }: { noteId: string }) => Promise<void>;
+  toggleModal: () => void;
   sortByUpdated?: boolean;
 } & NoteType;
 
@@ -15,7 +17,10 @@ export default function Note({
   title,
   sortByUpdated,
   handleDelete,
+  toggleModal,
 }: NoteProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const getDateString = (dateString: string) => {
     const date = new Date(dateString);
 
@@ -40,32 +45,34 @@ export default function Note({
   };
 
   return (
-    <div className={styles.container}>
-      <div>
-        <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>
-        <p className={styles.noteBody}>{note}</p>
-      </div>
-      <div className={styles.bottomContainer}>
-        <div className={styles.dateContainer}>
-          {sortByUpdated ? (
-            <div className={styles.date}>
-              <p className={styles.updateDate}>Updated: </p>
-              <p className={styles.updateDate}>{getDateString(updateDate)}</p>
-            </div>
-          ) : (
-            <div className={styles.date}>
-              <p className={styles.createDate}>Created: </p>
-              <p className={styles.createDate}>{getDateString(createDate)}</p>
-            </div>
-          )}
+    <>
+      <div className={styles.container} onClick={toggleModal}>
+        <div>
+          <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>
+          <p className={styles.noteBody}>{note}</p>
         </div>
-        <button
-          className={styles.deleteButton}
-          onClick={() => handleDelete({ noteId: id })}
-        >
-          <img src="/icon_delete.png" />
-        </button>
+        <div className={styles.bottomContainer}>
+          <div className={styles.dateContainer}>
+            {sortByUpdated ? (
+              <div className={styles.date}>
+                <p className={styles.updateDate}>Updated: </p>
+                <p className={styles.updateDate}>{getDateString(updateDate)}</p>
+              </div>
+            ) : (
+              <div className={styles.date}>
+                <p className={styles.createDate}>Created: </p>
+                <p className={styles.createDate}>{getDateString(createDate)}</p>
+              </div>
+            )}
+          </div>
+          <button
+            className={styles.deleteButton}
+            onClick={() => handleDelete({ noteId: id })}
+          >
+            <img src="/icon_delete.png" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

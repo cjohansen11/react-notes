@@ -17,4 +17,4 @@ RUN yarn prisma generate
 
 RUN yarn prisma migrate deploy
 
-CMD yarn dev
+CMD ["yarn", "build"]

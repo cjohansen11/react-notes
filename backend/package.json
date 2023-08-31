@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon --config nodemon.json src/index.ts",
+    "build": "ts-node src/index.ts",
     "test": "mocha --require ts-node/register \"./test/**/*.test.ts\" --exit"
   },
   "dependencies": {

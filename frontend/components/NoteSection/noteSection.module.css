@@ -2,6 +2,7 @@
   font-size: xx-large;
   font-weight: bold;
   padding-bottom: 12px;
+  text-transform: capitalize;
 }
 
 .activityContainer {

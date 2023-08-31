@@ -19,7 +19,11 @@ export default function Home() {
   const [isVerified, setIsVerified] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
-  const { data: user, isLoading: isFetchingUser } = useReadUser({
+  const {
+    data: user,
+    isLoading: isFetchingUser,
+    refetch: refetchUser,
+  } = useReadUser({
     email: userEmail,
     options: {
       enabled: !!userEmail,
@@ -32,6 +36,7 @@ export default function Home() {
       },
       async onError() {
         await createUser({ email: userEmail });
+        refetchUser();
       },
     },
   });
@@ -53,7 +58,7 @@ export default function Home() {
         <ActivityIndicator />
       </main>
     );
-
+  console.log({ isVerified, user });
   return (
     <main className={styles.main}>
       {isVerified && user ? (

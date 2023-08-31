@@ -63,7 +63,10 @@ export default function Note({
           </div>
           <button
             className={styles.deleteButton}
-            onClick={() => handleDelete({ noteId: id })}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleDelete({ noteId: id });
+            }}
           >
             <img src="/icon_delete.png" alt="delete note icon" />
           </button>

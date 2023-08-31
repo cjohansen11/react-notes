@@ -11,7 +11,12 @@ export default function Login({ onSubmit }: LoginProps) {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<LoginFormSchemaType>({ resolver: zodResolver(LoginFormSchema) });
+  } = useForm<LoginFormSchemaType>({
+    resolver: zodResolver(LoginFormSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
 
   return (
     <div className={styles.container}>

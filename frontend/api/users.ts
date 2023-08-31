@@ -1,4 +1,4 @@
-import { APIResponseUserCreate, APIResponseUserRead } from "@/types/Users";
+import { APIResponseUserCreate, APIResponseUserRead } from "@/types";
 import axios from "axios";
 
 export const createUser = async ({ email }: { email: string }) => {

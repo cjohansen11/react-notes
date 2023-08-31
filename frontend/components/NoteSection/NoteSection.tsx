@@ -2,13 +2,9 @@ import styles from "./noteSection.module.css";
 import { useState } from "react";
 import { Button, Note, NoteModal, Search } from "..";
 import { useForm, FormProvider } from "react-hook-form";
-import { NoteFormSchema, NoteFormType } from "@/types/Forms";
+import { NoteFormSchema, NoteFormType, Note as NoteType, User } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import useCreateNote from "@/hooks/useCreateNote";
-import { Note as NoteType } from "@/types/Notes";
-import { User } from "@/types/Users";
-import useListNotes from "@/hooks/useListNotes";
-import useDeleteNote from "@/hooks/useDeleteNote";
+import { useCreateNote, useListNotes, useDeleteNote } from "@/hooks";
 
 export type NoteSectionProps = {
   user: User;

@@ -1,5 +1,5 @@
 import api from "@/api";
-import { User } from "@/types/Users";
+import { User } from "@/types";
 import { UseQueryOptions, useQuery } from "react-query";
 
 export default function useReadUser({

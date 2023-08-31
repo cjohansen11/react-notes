@@ -1,5 +1,5 @@
 import styles from "./note.module.css";
-import { Note as NoteType } from "@/types/Notes";
+import { Note as NoteType } from "@/types";
 
 export type NoteProps = {
   handleDelete: ({ noteId }: { noteId: string }) => Promise<void>;

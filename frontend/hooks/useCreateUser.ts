@@ -1,6 +1,6 @@
 import { MutateOptions, useMutation } from "react-query";
 import api from "@/api";
-import { User } from "@/types/Users";
+import { User } from "@/types";
 
 export default function useCreateUser({
   options,

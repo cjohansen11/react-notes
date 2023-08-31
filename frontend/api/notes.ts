@@ -2,7 +2,8 @@ import {
   APIReponseNoteCreate,
   APIResponseNoteDelete,
   APIResponseNoteList,
-} from "@/types/Notes";
+} from "@/types";
+
 import axios from "axios";
 
 export const createNote = async ({

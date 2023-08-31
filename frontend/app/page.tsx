@@ -2,8 +2,7 @@
 
 import styles from "./page.module.css";
 import { ActivityIndicator, Login, NoteSection } from "@/components";
-import useCreateUser from "@/hooks/useCreateUser";
-import useReadUser from "@/hooks/useReadUser";
+import { useCreateUser, useReadUser } from "@/hooks";
 import { useEffect, useState } from "react";
 
 export default function Home() {

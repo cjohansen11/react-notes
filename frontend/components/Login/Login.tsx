@@ -1,7 +1,7 @@
 import styles from "./login.module.css";
 import { Button, Input } from "..";
 import { useForm, Controller } from "react-hook-form";
-import { LoginFormSchemaType, LoginFormSchema } from "@/types/Forms";
+import { LoginFormSchemaType, LoginFormSchema } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 export type LoginProps = { onSubmit: ({ email }: { email: string }) => void };

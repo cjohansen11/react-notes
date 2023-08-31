@@ -2,7 +2,7 @@ import styles from "./noteModal.module.css";
 import Modal from "react-modal";
 import { Input, TextArea, Button } from "..";
 import { Controller, useFormContext } from "react-hook-form";
-import { NoteFormType } from "@/types/Forms";
+import { NoteFormType } from "@/types";
 
 export type NoteModalProps = {
   isVisible: boolean;

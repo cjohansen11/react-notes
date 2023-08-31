@@ -1,5 +1,5 @@
 import api from "@/api";
-import { Note } from "@/types/Notes";
+import { Note } from "@/types";
 import { UseQueryOptions, useQuery } from "react-query";
 
 export default function useListNotes({

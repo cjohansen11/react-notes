@@ -1,6 +1,6 @@
 import { MutateOptions, useMutation } from "react-query";
 import api from "@/api";
-import { Note } from "@/types/Notes";
+import { Note } from "@/types";
 
 export default function useCreateNote({
   options,

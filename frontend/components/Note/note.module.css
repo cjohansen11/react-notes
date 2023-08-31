@@ -4,6 +4,7 @@
   flex-direction: column;
   padding: 18px;
   min-height: 300px;
+  max-width: 300px;
   border-radius: 4px;
   justify-content: space-between;
   opacity: 1;

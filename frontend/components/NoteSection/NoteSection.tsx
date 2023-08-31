@@ -1,10 +1,22 @@
 import styles from "./noteSection.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ActivityIndicator, Button, Note, NoteModal, Search } from "..";
-import { useForm, FormProvider } from "react-hook-form";
-import { NoteFormSchema, NoteFormType, Note as NoteType, User } from "@/types";
+import { useForm, FormProvider, Form } from "react-hook-form";
+import {
+  NoteFormSchema,
+  NoteFormType,
+  Note as NoteType,
+  SearchFormType,
+  User,
+} from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCreateNote, useListNotes, useDeleteNote } from "@/hooks";
+import {
+  useCreateNote,
+  useListNotes,
+  useDeleteNote,
+  useDebouncedValue,
+} from "@/hooks";
+import { title } from "process";
 
 export type NoteSectionProps = {
   user: User;
@@ -16,12 +28,44 @@ export default function NoteSection({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [notes, setNotes] = useState<NoteType[]>([]);
 
+  const newNoteMethods = useForm<NoteFormType>({
+    resolver: zodResolver(NoteFormSchema),
+    defaultValues: {
+      note: "",
+      title: "",
+    },
+  });
+  const { handleSubmit, setValue } = newNoteMethods;
+
+  const searchMethods = useForm<SearchFormType>({
+    defaultValues: {
+      orderBy: "Newest",
+      query: "",
+    },
+  });
+  const { watch } = searchMethods;
+
+  const getOrderBy = (orderBy?: string) => {
+    switch (orderBy) {
+      case "Oldest":
+        return "oldest";
+      case "Recently Updated":
+        return "recentlyUpdated";
+      case "Newest":
+        return "newest";
+      default:
+        return undefined;
+    }
+  };
+
   const { isLoading: isLoadingNotes } = useListNotes({
     userId,
+    query: useDebouncedValue(watch("query"), 500),
+    orderBy: getOrderBy(watch("orderBy")),
     options: {
       enabled: !!userId,
       refetchOnWindowFocus: false,
-      staleTime: Infinity,
+      notifyOnChangeProps: ["data"],
       onSuccess(data) {
         setNotes(data);
       },
@@ -33,6 +77,8 @@ export default function NoteSection({
       onSuccess(data) {
         setNotes((prev) => [data, ...prev]);
         setIsModalOpen(false);
+        setValue("note", "");
+        setValue("title", "");
       },
     },
   });
@@ -46,11 +92,6 @@ export default function NoteSection({
       },
     },
   });
-
-  const newNoteMethods = useForm<NoteFormType>({
-    resolver: zodResolver(NoteFormSchema),
-  });
-  const { handleSubmit } = newNoteMethods;
 
   const handleNewNoteSubmit = async ({
     title,
@@ -75,7 +116,9 @@ export default function NoteSection({
       <div className={styles.container}>
         <h1 className={styles.title}>{`${email.split("@")[0]}'s Notes`}</h1>
         <div className={styles.activityContainer}>
-          <Search />
+          <FormProvider {...searchMethods}>
+            <Search />
+          </FormProvider>
           <Button onClick={handleNewNote}>Create Note</Button>
         </div>
         <div className={styles.notesContainer}>

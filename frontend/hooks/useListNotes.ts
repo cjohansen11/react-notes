@@ -5,13 +5,17 @@ import { UseQueryOptions, useQuery } from "react-query";
 export default function useListNotes({
   userId,
   options,
+  query,
+  orderBy,
 }: {
   userId: string;
-  options: UseQueryOptions<Note[], unknown, Note[], string[]>;
+  query?: string;
+  orderBy?: "newest" | "oldest" | "recentlyUpdated";
+  options: UseQueryOptions<Note[], unknown, Note[], any>;
 }) {
   return useQuery(
-    ["list-notes", userId],
-    () => api.notes.listNotes({ userId }),
+    ["list-notes", userId, query, orderBy],
+    () => api.notes.listNotes({ userId, query, orderBy }),
     options
   );
 }

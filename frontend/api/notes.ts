@@ -27,10 +27,24 @@ export const createNote = async ({
   }
 };
 
-export const listNotes = async ({ userId }: { userId: string }) => {
+export const listNotes = async ({
+  userId,
+  query,
+  orderBy,
+}: {
+  userId: string;
+  query?: string;
+  orderBy?: "newest" | "oldest" | "recentlyUpdated";
+}) => {
   try {
     const { data } = await axios.get<APIResponseNoteList>(
-      `${process.env.NEXT_PUBLIC_API}/note/list/${userId}`
+      `${process.env.NEXT_PUBLIC_API}/note/list/${userId}`,
+      {
+        params: {
+          query,
+          orderBy,
+        },
+      }
     );
 
     if (data.status === "error") throw new Error(data.message);

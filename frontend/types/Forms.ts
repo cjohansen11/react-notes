@@ -10,11 +10,11 @@ export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
 
 const SearchFormSchema = z.object({
   query: z.string().optional(),
-  sort: z
+  orderBy: z
     .nativeEnum({
-      newest: "Newest",
-      oldest: "Oldest",
-      updated: "Recently Updated",
+      Newest: "Newest",
+      Oldest: "Oldest",
+      recentlyUpdated: "Recently Updated",
     })
     .optional(),
 });

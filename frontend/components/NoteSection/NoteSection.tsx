@@ -188,6 +188,7 @@ export default function NoteSection({
                 {...note}
                 key={note.id}
                 handleDelete={handleDeleteNote}
+                sortByUpdated={watch("orderBy") === "Recently Updated"}
                 toggleModal={() =>
                   toggleModal({
                     note: note.note,

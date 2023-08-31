@@ -11,14 +11,6 @@
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .activityContainer {
-    flex-direction: column;
-    gap: 4px;
-    padding-bottom: 12px;
-  }
-}
-
 .container {
   display: flex;
   flex-direction: column;
@@ -36,8 +28,20 @@
 .notesContainer {
   display: grid;
   grid-gap: 18px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   width: 100%;
+}
+
+@media (max-width: 768px) {
+  .activityContainer {
+    flex-direction: column;
+    gap: 4px;
+    padding-bottom: 12px;
+  }
+  .notesContainer {
+    width: auto;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
 }
 
 @keyframes fadeInOpacity {

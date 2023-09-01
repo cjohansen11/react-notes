@@ -21,11 +21,17 @@
   font-weight: 600;
   padding-bottom: 18px;
   text-decoration: underline;
+  font-size: larger;
 }
 
 .date {
   display: flex;
   gap: 4px;
+  font-size: 12px;
+}
+
+.dateTitle {
+  font-weight: 600;
 }
 
 .dateContainer {

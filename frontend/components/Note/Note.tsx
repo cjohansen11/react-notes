@@ -51,12 +51,16 @@ export default function Note({
           <div className={styles.dateContainer}>
             {sortByUpdated ? (
               <div className={styles.date}>
-                <p className={styles.updateDate}>Updated: </p>
+                <p className={`${styles.updateDate} ${styles.dateTitle}`}>
+                  Updated:{" "}
+                </p>
                 <p className={styles.updateDate}>{getDateString(updateDate)}</p>
               </div>
             ) : (
               <div className={styles.date}>
-                <p className={styles.createDate}>Created: </p>
+                <p className={`${styles.createDate} ${styles.dateTitle}`}>
+                  Created:{" "}
+                </p>
                 <p className={styles.createDate}>{getDateString(createDate)}</p>
               </div>
             )}

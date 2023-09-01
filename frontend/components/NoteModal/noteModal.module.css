@@ -29,6 +29,13 @@
   gap: 8px;
 }
 
+@media (max-width: 768px) {
+  .modal {
+    margin-left: 12px;
+    margin-right: 12px;
+  }
+}
+
 @keyframes fadeInOpacity {
   0% {
     opacity: 0;

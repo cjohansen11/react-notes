@@ -41,8 +41,11 @@
     padding-bottom: 12px;
   }
   .notesContainer {
-    width: auto;
+    width: 100%;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  }
+  .title {
+    font-size: 36px;
   }
 }
 

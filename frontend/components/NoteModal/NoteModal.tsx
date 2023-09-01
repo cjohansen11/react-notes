@@ -74,7 +74,9 @@ export default function NoteModal({
             )}
           />
         </div>
-        <Button onClick={handleSubmit}>{isEditForm ? "Update" : "Save"}</Button>
+        <Button onClick={handleSubmit} color="dark">
+          {isEditForm ? "Update" : "Save"}
+        </Button>
       </div>
     </Modal>
   );

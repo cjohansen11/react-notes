@@ -25,13 +25,13 @@
 
 .date {
   display: flex;
+  gap: 4px;
 }
 
 .dateContainer {
   font-size: 14px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
 }
 
 .deleteButton {

@@ -1,5 +1,5 @@
 .title {
-  font-size: xx-large;
+  font-size: 56px;
   font-weight: bold;
   padding-bottom: 12px;
   text-transform: capitalize;
@@ -24,6 +24,7 @@
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 500ms;
+  gap: 14px;
 }
 
 .notesContainer {

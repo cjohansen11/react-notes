@@ -7,11 +7,11 @@
   align-self: center;
   justify-self: center;
   border-radius: 4px;
-  /* opacity: 1;
+  opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: 100ms; */
+  animation-duration: 100ms;
 }
 
 .title {
@@ -36,11 +36,11 @@
   }
 }
 
-/* @keyframes fadeInOpacity {
+@keyframes fadeInOpacity {
   0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
-} */
+}

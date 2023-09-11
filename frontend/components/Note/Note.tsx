@@ -1,5 +1,6 @@
 import styles from "./note.module.css";
 import { Note as NoteType } from "@/types";
+import { motion } from "framer-motion";
 
 export type NoteProps = {
   handleDelete: ({ noteId }: { noteId: string }) => Promise<void>;
@@ -41,41 +42,44 @@ export default function Note({
   };
 
   return (
-    <>
-      <div className={styles.container} onClick={toggleModal}>
-        <div>
-          <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>
-          <p className={styles.noteBody}>{note}</p>
-        </div>
-        <div className={styles.bottomContainer}>
-          <div className={styles.dateContainer}>
-            {sortByUpdated ? (
-              <div className={styles.date}>
-                <p className={`${styles.updateDate} ${styles.dateTitle}`}>
-                  Updated:{" "}
-                </p>
-                <p className={styles.updateDate}>{getDateString(updateDate)}</p>
-              </div>
-            ) : (
-              <div className={styles.date}>
-                <p className={`${styles.createDate} ${styles.dateTitle}`}>
-                  Created:{" "}
-                </p>
-                <p className={styles.createDate}>{getDateString(createDate)}</p>
-              </div>
-            )}
-          </div>
-          <button
-            className={styles.deleteButton}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleDelete({ noteId: id });
-            }}
-          >
-            <img src="/icon_delete.png" alt="delete note icon" />
-          </button>
-        </div>
+    <motion.div
+      className={styles.container}
+      onClick={toggleModal}
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 1.025 }}
+    >
+      <div>
+        <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>
+        <p className={styles.noteBody}>{note}</p>
       </div>
-    </>
+      <div className={styles.bottomContainer}>
+        <div className={styles.dateContainer}>
+          {sortByUpdated ? (
+            <div className={styles.date}>
+              <p className={`${styles.updateDate} ${styles.dateTitle}`}>
+                Updated:{" "}
+              </p>
+              <p className={styles.updateDate}>{getDateString(updateDate)}</p>
+            </div>
+          ) : (
+            <div className={styles.date}>
+              <p className={`${styles.createDate} ${styles.dateTitle}`}>
+                Created:{" "}
+              </p>
+              <p className={styles.createDate}>{getDateString(createDate)}</p>
+            </div>
+          )}
+        </div>
+        <button
+          className={styles.deleteButton}
+          onClick={(e) => {
+            e.stopPropagation();
+            handleDelete({ noteId: id });
+          }}
+        >
+          <img src="/icon_delete.png" alt="delete note icon" />
+        </button>
+      </div>
+    </motion.div>
   );
 }

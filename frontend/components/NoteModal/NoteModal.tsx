@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import { Input, TextArea, Button } from "..";
 import { Controller, useFormContext } from "react-hook-form";
 import { NoteFormType } from "@/types";
+import { motion } from "framer-motion";
 
 export type NoteModalProps = {
   isVisible: boolean;
@@ -42,7 +43,13 @@ export default function NoteModal({
         },
       }}
     >
-      <div className={styles.container}>
+      <motion.div
+        className={styles.container}
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        transition={{ ease: "easeIn", duration: 0.25 }}
+      >
         <p className={styles.title}>Create a new note</p>
         <div>
           <Controller
@@ -77,7 +84,7 @@ export default function NoteModal({
         <Button onClick={handleSubmit} color="dark">
           {isEditForm ? "Update" : "Save"}
         </Button>
-      </div>
+      </motion.div>
     </Modal>
   );
 }

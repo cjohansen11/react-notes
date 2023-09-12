@@ -30,7 +30,7 @@ export default function Login({ onSubmit }: LoginProps) {
             value={field.value}
             helperText={errors.email?.message}
             isError={!!errors.email}
-            title="Enter your email:"
+            placeholder="Enter your email"
             onKeyUp={(e) => {
               if (e.code.includes("Enter")) handleSubmit(onSubmit)();
             }}

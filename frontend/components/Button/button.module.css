@@ -20,8 +20,12 @@
 }
 
 .dark {
+  background-color: var(--alt-background-hex);
+  color: #fff;
+}
+
+.dark:hover {
   background-color: var(--main-background-hex);
-  color: var(--main-text-hex);
 }
 
 @media (max-width: 768px) {

@@ -169,6 +169,11 @@ export default function NoteSection({
     setValue("title", "");
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("existingUser");
+    window.location.reload();
+  };
+
   return (
     <>
       <div className={styles.headerContainer}>
@@ -180,6 +185,9 @@ export default function NoteSection({
             <Search />
           </FormProvider>
           <Button onClick={() => toggleModal({})}>Create Note</Button>
+          <Button color="dark" onClick={handleLogout}>
+            Logout
+          </Button>
         </div>
       </div>
       <div className={styles.container}>

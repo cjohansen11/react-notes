@@ -5,7 +5,7 @@
 }
 
 .helperText {
-  color: var(--main-text-hex);
+  color: #fff;
   font-size: small;
   padding-top: 4px;
 }
@@ -52,6 +52,7 @@
 
 .title {
   padding-bottom: 4px;
+  color: #fff;
 }
 
 @media (max-width: 768px) {

@@ -45,8 +45,8 @@ export default function Note({
     <motion.div
       className={styles.container}
       onClick={toggleModal}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 1.025 }}
+      whileHover={{ scale: 1.025 }}
+      whileTap={{ scale: 1.015 }}
     >
       <div>
         <p className={styles.title}>{title || `${note.slice(0, 17)}...`}</p>

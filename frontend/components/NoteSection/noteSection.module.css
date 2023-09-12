@@ -1,16 +1,31 @@
 .title {
   font-size: 32px;
   font-weight: 400;
-  padding-bottom: 12px;
   text-transform: capitalize;
-  color: var(--header-text-hex);
+  color: var(--alt-text-hex);
 }
 
 .activityContainer {
   display: flex;
-  width: 100%;
   gap: 12px;
   align-items: center;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--accent-light-bg);
+  margin-bottom: 24px;
+  padding-top: 36px;
+  padding-bottom: 36px;
+  padding-left: 28px;
+  padding-right: 24px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.5));
 }
 
 .container {
@@ -26,6 +41,8 @@
   animation-timing-function: ease-in;
   animation-duration: 500ms;
   gap: 14px;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .notesContainer {

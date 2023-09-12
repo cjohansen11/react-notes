@@ -6,16 +6,17 @@
   min-height: 420px;
   align-self: center;
   justify-self: center;
-  border-radius: 10px;
+  border-radius: 12px;
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 100ms;
+  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
 }
 
 .title {
-  color: var(--header-text-hex);
+  color: var(--main-text-hex);
   font-size: 24px;
   text-align: center;
 }
@@ -25,7 +26,7 @@
   flex: 1;
   flex-direction: column;
   padding: 12px;
-  gap: 12px;
+  gap: 18px;
 }
 
 .inputContainer {

@@ -170,7 +170,7 @@ export default function NoteSection({
 
   return (
     <>
-      <div className={styles.container}>
+      <div className={styles.headerContainer}>
         <h1 className={styles.title}>{`${email.split("@")[0]} - Notes`}</h1>
         <div className={styles.activityContainer}>
           <FormProvider {...searchMethods}>
@@ -178,6 +178,8 @@ export default function NoteSection({
           </FormProvider>
           <Button onClick={() => toggleModal({})}>Create Note</Button>
         </div>
+      </div>
+      <div className={styles.container}>
         <div className={styles.notesContainer}>
           {isLoadingNotes ? (
             <ActivityIndicator />

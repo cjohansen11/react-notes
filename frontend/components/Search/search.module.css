@@ -9,8 +9,9 @@
   background-color: #fff;
   color: #000;
   min-height: 50px;
-  border-radius: 10px;
+  border-radius: 12px;
   font-family: var(--font-mono);
+  border: solid 1px var(--main-background-hex);
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 20px;

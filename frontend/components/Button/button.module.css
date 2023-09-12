@@ -1,13 +1,14 @@
 .button {
   display: flex;
-  background-color: var(--neutral-light-gray);
+  background-color: #fff;
+  border: solid 1px var(--main-background-hex);
   color: #000;
   font-weight: 700;
   padding-left: 24px;
   padding-right: 24px;
   padding-top: 16px;
   padding-bottom: 16px;
-  border-radius: 10px;
+  border-radius: 12px;
   justify-content: center;
   cursor: pointer;
   max-height: 50px;

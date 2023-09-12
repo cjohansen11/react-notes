@@ -27,8 +27,8 @@ export default function Button({
       disabled={isDisabled}
       className={`${styles.button} ${getColor()}`}
       onClick={handleClick}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 1.025 }}
+      whileHover={{ scale: 1.025 }}
+      whileTap={{ scale: 1.015 }}
     >
       {children}
     </motion.button>

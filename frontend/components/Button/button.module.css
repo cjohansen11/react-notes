@@ -1,16 +1,21 @@
 .button {
   display: flex;
-  background-color: var(--main-text-hex);
-  border-color: var(--alt-text-dark-hex);
-  color: var(--main-background-hex);
-  font-weight: bold;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  border-radius: 4px;
+  background-color: var(--neutral-light-gray);
+  color: #000;
+  font-weight: 700;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  border-radius: 10px;
   justify-content: center;
   cursor: pointer;
+  max-height: 50px;
+  min-width: 200px;
+}
+
+.button:hover {
+  background-color: var(--accent-light-bg);
 }
 
 .dark {

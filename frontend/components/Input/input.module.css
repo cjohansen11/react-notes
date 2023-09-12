@@ -11,27 +11,30 @@
 }
 
 .container {
-  padding-top: 12px;
-  padding-bottom: 12px;
   display: flex;
-  flex: 1;
   width: 100%;
   flex-direction: column;
+  min-height: 50px;
 }
 
 .input {
-  min-height: 42px;
+  display: flex;
+  flex: 1;
   min-width: 260px;
-  padding-left: 4px;
-  color: var(--main-text-hex);
-  background-color: var(--alt-background-hex);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #000;
+  background-color: #fff;
   border-style: none;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 18px;
+  font-family: var(--font-mono);
 }
 
 .input::placeholder {
-  color: var(--main-text-hex);
+  color: var(--neutral-gray-bg);
   opacity: 65%;
 }
 

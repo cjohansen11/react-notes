@@ -50,8 +50,10 @@ export default function NoteModal({
         exit={{ opacity: 0 }}
         transition={{ ease: "easeIn", duration: 0.25 }}
       >
-        <p className={styles.title}>Create a new note</p>
-        <div>
+        <p className={styles.title}>
+          {isEditForm ? `Update your note` : `Create a new note`}
+        </p>
+        <div className={styles.inputContainer}>
           <Controller
             control={control}
             name="title"
@@ -81,9 +83,7 @@ export default function NoteModal({
             )}
           />
         </div>
-        <Button onClick={handleSubmit} color="dark">
-          {isEditForm ? "Update" : "Save"}
-        </Button>
+        <Button onClick={handleSubmit}>{isEditForm ? "Update" : "Save"}</Button>
       </motion.div>
     </Modal>
   );

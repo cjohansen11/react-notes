@@ -1,12 +1,3 @@
-/*
-  Color Palette
-  Alice Blue -    #D5DFE5
-  Thistle -       #C9B1BD
-  Rosy Brown -    #B49594
-  Reseda Green -  #7F9172
-  Hookers Green - #567568
-*/
-
 html,
 body,
 div,
@@ -136,15 +127,19 @@ table {
 :root {
   --max-width: 1100px;
   --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono",
-    "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro",
-    "Fira Mono", "Droid Sans Mono", "Courier New", monospace;
+  --font-mono: "Lato";
 
-  --main-text-hex: #d5dfe5;
-  --main-background-hex: #567568;
+  --main-text-hex: #ffffff;
+  --header-text-hex: #d7a13b;
+  --alt-text-hex: #285e50;
+
+  --neutral-light-gray: #e9e9e9;
+  --accent-light-bg: #e9f0ee;
+
+  --main-background-hex: #1d4339;
   --alt-background-hex: #7f9172;
-  --alt-text-hex: #c9b1bd;
-  --note-hex: #d5dfe5;
+
+  --note-hex: #d4e2dd;
 }
 
 * {

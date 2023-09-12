@@ -1,21 +1,22 @@
 .textArea {
-  background-color: var(--alt-background-hex);
-  color: var(--main-text-hex);
+  background-color: #fff;
+  color: #000;
   font-size: 18px;
   font-family: inherit;
   display: flex;
   flex: 1;
   min-width: 100%;
   resize: none;
-  padding-left: 4px;
-  padding-top: 8px;
-  border-radius: 4px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 10px;
   min-height: 200px;
 }
 
 .textArea::placeholder {
-  color: var(--main-text-hex);
-  opacity: 65%;
+  color: var(--neutral-gray-bg);
 }
 
 .error {

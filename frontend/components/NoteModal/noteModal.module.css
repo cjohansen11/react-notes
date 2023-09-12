@@ -1,12 +1,12 @@
 .modal {
-  background-color: var(--note-hex);
+  background-color: var(--main-background-hex);
   display: flex;
   flex: 1;
-  max-width: 400px;
-  min-height: 400px;
+  max-width: 420px;
+  min-height: 420px;
   align-self: center;
   justify-self: center;
-  border-radius: 4px;
+  border-radius: 10px;
   opacity: 1;
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
@@ -15,9 +15,8 @@
 }
 
 .title {
-  color: var(--main-background-hex);
+  color: var(--header-text-hex);
   font-size: 24px;
-  font-weight: bold;
   text-align: center;
 }
 
@@ -26,7 +25,13 @@
   flex: 1;
   flex-direction: column;
   padding: 12px;
-  gap: 8px;
+  gap: 12px;
+}
+
+.inputContainer {
+  gap: 12px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {

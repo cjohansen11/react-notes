@@ -1,5 +1,5 @@
 .modal {
-  background-color: var(--main-background-hex);
+  background-color: var(--note-hex);
   display: flex;
   flex: 1;
   max-width: 420px;
@@ -12,7 +12,6 @@
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
   animation-duration: 100ms;
-  filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
 }
 
 .title {

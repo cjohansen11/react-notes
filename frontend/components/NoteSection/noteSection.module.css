@@ -1,8 +1,6 @@
 .title {
-  font-size: 32px;
-  font-weight: 400;
-  text-transform: capitalize;
-  color: var(--alt-text-hex);
+  font-size: 40px;
+  color: var(--main-text-hex);
 }
 
 .activityContainer {
@@ -19,8 +17,8 @@
   align-items: center;
   background-color: var(--accent-light-bg);
   margin-bottom: 24px;
-  padding-top: 36px;
-  padding-bottom: 36px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   padding-left: 28px;
   padding-right: 24px;
   border-bottom-left-radius: 10px;

@@ -1,6 +1,6 @@
 .textArea {
   background-color: #fff;
-  color: #000;
+  color: var(--main-text-hex);
   font-size: 18px;
   font-family: inherit;
   display: flex;
@@ -17,13 +17,14 @@
 
 .textArea::placeholder {
   color: var(--neutral-gray-bg);
+  opacity: 65%;
 }
 
 .error {
   border-style: solid;
   border-width: 2px;
   border-color: red;
-  border-radius: 4px;
+  border-radius: 12px;
 }
 
 .helperText {

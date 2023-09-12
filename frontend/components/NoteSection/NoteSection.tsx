@@ -17,6 +17,7 @@ import {
   useDebouncedValue,
   useUpdateNote,
 } from "@/hooks";
+import { parisiene } from "@/app/fonts";
 
 export type NoteSectionProps = {
   user: User;
@@ -171,7 +172,9 @@ export default function NoteSection({
   return (
     <>
       <div className={styles.headerContainer}>
-        <h1 className={styles.title}>{`${email.split("@")[0]} - Notes`}</h1>
+        <h1 className={`${styles.title} ${parisiene.className}`}>{`${
+          email.split("@")[0]
+        }'s Notes`}</h1>
         <div className={styles.activityContainer}>
           <FormProvider {...searchMethods}>
             <Search />

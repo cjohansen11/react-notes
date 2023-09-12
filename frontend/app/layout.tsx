@@ -1,12 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Lato } from "next/font/google";
+import { lato } from "./fonts";
 import Providers from "./providers";
 
-const lato = Lato({
-  subsets: ["latin"],
-  weight: ["100", "300", "400", "700"],
-});
 export const metadata: Metadata = {
   title: "Notes",
   description: "A simple React notes app",
